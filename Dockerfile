@@ -25,9 +25,7 @@ RUN wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-$JMETER_V
     wget https://jmeter-plugins.org/downloads/file/JMeterPlugins-ExtrasLibs-1.4.0.zip && \
     unzip -o JMeterPlugins-ExtrasLibs-1.4.0.zip -d /jmeter/apache-jmeter-$JMETER_VERSION
     
-RUN printf '%s\t' 'jmeter.save.saveservice.default_delimiter=\t' >> /jmeter/apache-jmeter-$JMETER_VERSION/bin/user.properties
-RUN printf '\n' >> /jmeter/apache-jmeter-$JMETER_VERSION/bin/user.properties
-RUN printf 'jmeter.save.saveservice.print_field_names=true' >> /jmeter/apache-jmeter-$JMETER_VERSION/bin/user.properties
+COPY config/user.properties /jmeter/apache-jmeter-$JMETER_VERSION/bin/user.properties
 
 WORKDIR $JMETER_HOME 
 
