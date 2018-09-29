@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  master:
+    build: .
+    command: master
+    tty: true
+    ports:
+      - "60000"
+    networks:
+      - jmeter-network
+  server:
+    build: .
+    command: server
+    tty: true
+    ports:
+      - "50000"
+      - "1099"
+    networks:
+      - jmeter-network
+    depends_on:
+      - master
+
+networks:
+  jmeter-network:

@@ -1,26 +1,13 @@
-FROM ubuntu:trusty
+FROM openjdk:8-jre-slim
 
 ENV JMETER_VERSION 3.3
-ENV JAVA_VERSION "8"
 ENV JMETER_HOME /jmeter/apache-jmeter-$JMETER_VERSION/
 ENV PATH $JMETER_HOME/bin:$PATH
 
 # INSTALL PRE-REQ
 RUN apt-get update && \
     apt-get -y install \
-    wget \
-    default-jre-headless \
-    telnet \
-    iputils-ping \
-    unzip \
-    software-properties-common
-
-# INSTALL JAVA
-RUN \
-    echo oracle-java$JAVA_VERSION-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
-    add-apt-repository -y ppa:webupd8team/java && \
-    apt-get update && \
-    apt-get install -y oracle-java$JAVA_VERSION-installer
+    wget 
 
 # INSTALL JMETER BASE 
 RUN mkdir /jmeter
@@ -36,11 +23,12 @@ RUN wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-$JMETER_V
 
 WORKDIR $JMETER_HOME 
     
-COPY config/user.properties /jmeter/apache-jmeter-$JMETER_VERSION/bin/user.properties
-COPY script/install_plugin-manager.sh /jmeter/apache-jmeter-$JMETER_VERSION/install_plugin-manager.sh
+COPY config/user.properties bin/user.properties
+COPY scripts/install_plugin-manager.sh .
+COPY scripts/docker-entrypoint.sh /docker-entrypoint.sh
 
-RUN chmod +x /jmeter/apache-jmeter-$JMETER_VERSION/install_plugin-manager.sh
-RUN /jmeter/apache-jmeter-$JMETER_VERSION/install_plugin-manager.sh
+RUN chmod +x install_plugin-manager.sh /docker-entrypoint.sh
+RUN ./install_plugin-manager.sh
 
-EXPOSE 6000
-CMD tail -f /dev/null
+EXPOSE 6000 1099 50000
+ENTRYPOINT ["/docker-entrypoint.sh"]
