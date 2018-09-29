@@ -7,10 +7,12 @@ services:
     tty: true
     ports:
       - "60000"
+    volumes:
+      - "./test/:/jmeter/sample/"
     networks:
       - jmeter-network
   server:
-    build: .
+    image: pedrocesarti/jmeter-docker:latest
     command: server
     tty: true
     ports:
