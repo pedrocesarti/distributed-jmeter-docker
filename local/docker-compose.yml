@@ -2,7 +2,7 @@ version: '3'
 
 services:
   master:
-    build: .
+    build: ..
     command: master
     tty: true
     ports:
