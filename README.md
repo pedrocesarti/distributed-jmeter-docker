@@ -23,12 +23,12 @@ The [Dockerfile](https://github.com/pedrocesar-ti/distributed-jmeter-docker/blob
 
 ### Running Master or Server
 ####Master
-```
-docker run -p 60000:60000 -d pedrocesarti/jmeter-docker:latest master
+```sh
+docker run -p 60000:60000 -v <TEST_PLAN_LOCAL>:<TEST_PLAN_CONTAINER> -d pedrocesarti/jmeter-docker:latest master
 ```
 
 ####Server
-```
+```sh
 docker run -p 1099:1099 -p 50000:50000 -d pedrocesarti/jmeter-docker:latest server
 ```
 
@@ -36,7 +36,11 @@ docker run -p 1099:1099 -p 50000:50000 -d pedrocesarti/jmeter-docker:latest serv
 ### Running Master and Server (Docker Compose)
 You can also create a whole stack with master and servers to run a distributed JMeter.
 
+```sh
+docker-compose up -d
 ```
+
+```yaml
 version: '3'
 services:
   master:
@@ -58,10 +62,17 @@ services:
       - master
 ```
 
-This is going to create one master and one server, but you can also run the scale command to create more instances of your servers.
-```
+This is going to create one master and one server running locally, but you can also scale up and down the number instances servers running.
+```sh
 docker-compose scale server=5
 ```
+
+#### Volumes
+Another good point to mention here is that we suggest that you use volumes to share your test plans with the master container and once you have your test plans on your master container, you only going to need exec:
+
+```sh
+jmeter -n -t script.jmx -R server1,server2,…
+``` 
 
 You can also use this [docker-compose](https://github.com/pedrocesar-ti/distributed-jmeter-docker/blob/master/local/docker-compose.yml) to deploy in a Docker Swarm cluster defining better techniques to scale the number of replicas you want for each service and add all power of the internal discovery service.
 
