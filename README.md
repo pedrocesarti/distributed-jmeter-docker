@@ -22,12 +22,12 @@ The [Dockerfile](https://github.com/pedrocesar-ti/distributed-jmeter-docker/blob
 - 5.0 
 
 ### Running Master or Server
-####Master
+#### Master
 ```sh
 docker run -p 60000:60000 -v <TEST_PLAN_LOCAL>:<TEST_PLAN_CONTAINER> -d pedrocesarti/jmeter-docker:latest master
 ```
 
-####Server
+#### Server
 ```sh
 docker run -p 1099:1099 -p 50000:50000 -d pedrocesarti/jmeter-docker:latest server
 ```
