@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jmeter-server
+  labels:
+    app: jmeter-server
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: jmeter-server
+  template:
+    metadata:
+      labels:
+        app: jmeter-server
+    spec:
+      containers:
+      - name: jmeter-server
+        image: pedrocesarti/jmeter-docker:latest
+        args: ["server"]
+        ports:
+        - containerPort: 50000
+        - containerPort: 1099

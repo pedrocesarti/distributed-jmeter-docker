@@ -1,0 +1,17 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: jmeter-server
+spec:
+  clusterIP: None
+  selector:
+    app: jmeter-server
+  ports:
+  - protocol: TCP
+    name: tcp-50000
+    port: 50000
+    targetPort: http
+  - protocol: TCP
+    name: tcp-1099
+    port: 1099
+    targetPort: http
