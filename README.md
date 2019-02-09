@@ -50,4 +50,8 @@ jmeter -n -t script.jmx -R server1,server2,…
 
 You can also use this [docker-compose](https://github.com/pedrocesar-ti/distributed-jmeter-docker/blob/master/local/docker-compose.yml) to deploy in a Docker Swarm cluster defining better techniques to scale the number of replicas you want for each service and add all power of the internal discovery service.
 
+## K8s
+For the Kubernetes support, also have a look at the official helm/[chart](https://github.com/helm/charts/tree/master/stable/distributed-jmeter) repository.
+
+
 Enjoy! :)
