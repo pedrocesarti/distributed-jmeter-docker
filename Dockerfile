@@ -8,7 +8,7 @@ ENV PATH $JMETER_HOME/bin:$PATH
 # INSTALL PRE-REQ
 RUN apt-get update && \
     apt-get -y install \
-    wget unzip
+    wget
 
 # INSTALL JMETER BASE 
 RUN mkdir /jmeter
