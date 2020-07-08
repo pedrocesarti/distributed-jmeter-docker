@@ -30,3 +30,22 @@ spec:
           args: ["master"]
           ports:
             - containerPort: 60000
+          volumeMounts:
+            - name: user-properties
+              mountPath: /jmeter/bin/user.properties
+              readOnly: true
+              subPath: "user.properties"
+            - name: data
+              mountPath: /jmeter/data
+              subPath: "data"
+      volumes:
+        - name:  user-properties
+          configMap:
+            name: {{ .Release.Name }}-user-properties
+        - name: data
+          {{- if .Values.dataVolume.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-data
+          {{ else }}
+          emptyDir: {}
+          {{ end }}

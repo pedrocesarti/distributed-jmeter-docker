@@ -22,3 +22,8 @@ image:
   ## The tag for the image
   ## ref: https://hub.docker.com/r/pedrocesarti/jmeter-docker/tags/
   tag: 3.3
+
+dataVolume:
+  enabled: true
+  storageClassName: readwritemany 
+  size: 100Mi
