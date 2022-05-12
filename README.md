@@ -1,3 +1,8 @@
+:rotating_light: This project is outdated/abandoned/archived and will not be updated anymore. :rotating_light:
+
+-------------
+
+
 # Distributed JMeter - Docker
 
 Apache Jmeter™ is an open source tool that helps creating and running load test plans. And this Docker image was created to help you running different versions of JMeter in a Docker container, also helping you running in a distributed fashion (master -> server approach). 
