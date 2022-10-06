@@ -1,0 +1,14 @@
+{{- if .Values.dataVolume.enabled -}}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Release.Name }}-data
+  namespace: {{ .Release.Namespace }}
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: {{ .Values.dataVolume.size }} 
+  storageClassName: {{ .Values.dataVolume.storageClassName }}
+{{- end -}}
