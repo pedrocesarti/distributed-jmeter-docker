@@ -37,6 +37,22 @@ docker run -p 60000:60000 -v <TEST_PLAN_LOCAL>:<TEST_PLAN_CONTAINER> -d pedroces
 docker run -p 1099:1099 -p 50000:50000 -d pedrocesarti/jmeter-docker:latest server
 ```
 
+### Building versions
+
+Build latest version:
+```sh
+make
+```
+
+Build all versions:
+```sh
+make build_all
+```
+
+Building only a specific version
+```sh
+make build_specific_version version=5.0
+```
 
 ## Running Master and Server (Docker Compose)
 You can also create a whole stack with master and servers to run a distributed JMeter tests locally or in a Docker Swarm Cluster. Check out this [docker-compose.yml](https://github.com/pedrocesar-ti/distributed-jmeter-docker/blob/master/local/docker-compose.yml) to see one example of this infra running locally.
